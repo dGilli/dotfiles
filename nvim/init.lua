@@ -1,0 +1,2 @@
+require("deg")
+print('hello')
