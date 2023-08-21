@@ -10,21 +10,33 @@
 # Arguments:
 #     DAYS: The number of days to look back for commits.
 # ------------------------------------------
+
+# Helper function for listing commits
+_list_commits_helper() {
+    pushd "$1" > /dev/null 2>&1
+
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        local commits
+        commits=$(
+            git --no-pager log --since="$2 days ago" --oneline 2>/dev/null
+        )
+        if [ ! -z "$commits" ]; then
+            echo "\n\n=== Commits in $1 ===\n$commits"
+        fi
+    fi
+
+    popd > /dev/null 2>&1
+}
+
+# Main lists_commits function
 list_commits() {
     if [[ -z "$1" ]]; then
         echo "Please provide the number of days as an argument."
         return 1
     fi
 
-    find . -type d -name ".git" -exec sh -c 'dir="$(dirname {})";
-    pushd "$dir" > /dev/null 2>&1;
-    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-        commits=$(git --no-pager log --since="$1 days ago" --oneline 2>/dev/null);
-        if [ ! -z "$commits" ]; then
-            echo "\n=== Commits in $dir ===\n$commits";
-        fi
-    fi;
-    popd > /dev/null 2>&1;' sh "$1" \;
+    find . -type d -name ".git" -exec bash -c \
+        '_list_commits_helper "$(dirname "$0")" "$1"' {} "$1" \;
 }
 
 # ------------------------------------------
@@ -41,7 +53,6 @@ list_commits() {
 # ------------------------------------------
 function list_scopes() {
   local BAD_COUNT=0
-  local MAX_BAD_COUNT=10
   local LAST_GOOD_COMMIT=""
 
   git log --oneline | while read commit; do
@@ -51,7 +62,7 @@ function list_scopes() {
       BAD_COUNT=0
     else
       BAD_COUNT=$((BAD_COUNT + 1))
-      if [ $BAD_COUNT -ge $MAX_BAD_COUNT ]; then
+      if [ $BAD_COUNT -ge 10 ]; then
         echo "\nProbably only bad commits from here on out..."
         if [ -n "$LAST_GOOD_COMMIT" ]; then
           echo "Last detected good commit: $LAST_GOOD_COMMIT"
