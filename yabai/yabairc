@@ -51,6 +51,9 @@ yabai -m rule --add app='^Messages$' manage=off
 yabai -m rule --add title='^JetBrains Toolbox$' manage=off
 yabai -m rule --add app='^1Password$' manage=off
 yabai -m rule --add app='^Geforce Now$' manage=off
+yabai -m rule --add app='^FaceTime$' manage=off
+yabai -m rule --add app='^(Firefox Developer Edition|Google Chrome)$' title='^Dev(eloper )?Tools' manage=off
+yabai -m rule --add app='^Docker Desktop$' manage=off
 
 # spacebar padding on top screen
 SPACEBAR_HEIGHT=$(spacebar -m config height)
