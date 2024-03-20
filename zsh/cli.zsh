@@ -72,3 +72,109 @@ function list_scopes() {
     fi
   done
 }
+
+# ------------------------------------------
+# Function: add_work_item
+# Description:
+#    This function adds a work item to Azure DevOps.
+#    It takes two arguments: the project and the title.
+# ------------------------------------------
+function add_work_item() {
+    declare -A projects
+    projects+=(
+        ["web"]="Web Engineering"
+        ["akdms"]="AKDMS Website"
+    )
+    az boards work-item create \
+        --org "https://dev.azure.com/acribis" \
+        --project ${projects[$1]} \
+        --type "User Story" \
+        --title $2 \
+        --open
+}
+complete -W "web akdms" add_work_item
+
+# ------------------------------------------
+# Function: list_tasks
+# ------------------------------------------
+function list_tasks() {
+    local query_path="f7a5a5fc-a04c-4b93-a1f7-2b86ff42d227"
+    local selected_project=$(az boards query --path $query_path \
+        --query '[*][fields."System.AreaLevel1"]' -o tsv \
+        | awk '!x[$0]++' | fzf)
+
+    if [ -n "$selected_project" ]; then
+        local selected_task=$(az boards query --path $query_path \
+            --query "[?fields.\"System.AreaLevel1\"=='$selected_project'][join(': ', [to_string(id), fields.\"System.Title\"])]" \
+            -o tsv \
+            | fzf)
+    fi
+
+    if [ -n "$selected_task" ]; then
+        local selected_task_id=$(echo $selected_task | sed 's/:.*//')
+        echo "Task ID: $selected_task_id"
+
+        echo -n "FROM / TO: "
+        read input_string
+        fromTo=("${(@s:/:)input_string}")
+
+        trim_whitespace() {
+            local var="$1"
+            var="${var#"${var%%[![:space:]]*}"}"  # remove leading whitespace
+            var="${var%"${var##*[![:space:]]}"}"  # remove trailing whitespace
+            echo "$var"
+        }
+
+        local from=$(trim_whitespace "$fromTo[1]")
+        local to=$(trim_whitespace "$fromTo[2]")
+
+        local command="watson add -cb '$selected_project' +'azure $selected_task_id' --from $from --to $to"
+
+        # Echo the command
+        echo "Executing command: $command"
+
+        # Execute the command
+        eval "$command"
+    fi
+}
+
+# ------------------------------------------
+# Function: list_tasks
+# ------------------------------------------
+function watson_edit_month() {
+    ids=$(watson log --from 2023-09-01 -s | awk -F, 'NR > 1 {print $1}')
+
+    IFS=$'\n'
+    for id in $ids; do
+        echo "Processing ID: $id"
+        watson edit "$id"
+    done
+    unset IFS
+}
+
+# ------------------------------------------
+# Function: watson_retro
+# Description:
+#     This function parses the git commit history of the current directory,
+#     searching for commit messages that follow the Angular commit convention.
+#     It extracts and prints the scopes from these commits. If 10 consecutive
+#     commits are found that do not follow the Angular convention, the function
+#     prints a warning message and reports the last known good commit.
+#
+# Usage:
+#     list_scopes
+# ------------------------------------------
+watson_retro() {
+    if [[ $1 == -* ]]; then
+        hours=$(echo $1 | tr -d '-' | cut -d: -f1)
+        minutes=$(echo $1 | cut -d: -f2)
+        total_minutes=$((hours * 60 + minutes))
+        time=$(date -j -v-"${total_minutes}M" +"%H:%M" "$(date +%m%d%H%M%Y)")
+    else
+        time=$1
+    fi
+    project_arg=$2
+    shift 2
+    wt start --at "$time" "$project_arg" "$@" && wt stop
+}
+
