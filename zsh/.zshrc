@@ -95,13 +95,10 @@ export ARCHFLAGS="-arch x86_64"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+export PATH="/Users/dennisgilli/go/bin:$PATH"
 
+# Personal scripts path
+export PATH="/Users/dennisgilli/.local/bin:$PATH"
+
+# Set personal aliases
 for config (~/.config/zsh/*.zsh) source $config
