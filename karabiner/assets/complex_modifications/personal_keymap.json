@@ -1,0 +1,269 @@
+{
+    "rules": [
+        {
+            "description": "Home row mod keys (asdf to ⌘⌥⇧⌃)",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "f",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to_if_alone": [
+                        {
+                            "key_code": "f"
+                        }
+                    ],
+                    "to_if_held_down": [
+                        {
+                            "key_code": "left_control"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "d",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to_if_alone": [
+                        {
+                            "key_code": "d"
+                        }
+                    ],
+                    "to_if_held_down": [
+                        {
+                            "key_code": "left_shift"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "s",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to_if_alone": [
+                        {
+                            "key_code": "s"
+                        }
+                    ],
+                    "to_if_held_down": [
+                        {
+                            "key_code": "left_alt"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "a",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to_if_alone": [
+                        {
+                            "key_code": "a"
+                        }
+                    ],
+                    "to_if_held_down": [
+                        {
+                            "key_code": "left_command"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "Right Cmd (⌘) to right ctrl (⌃)",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "right_command",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_control"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "Fix 'grave_accent_and_tilde' key (~)",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "grave_accent_and_tilde",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "non_us_backslash"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "non_us_backslash",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "grave_accent_and_tilde"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "Option (⌥) + hjkl to arrows (←↓↑→)",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "h",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_arrow"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "j",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "down_arrow"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "k",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "up_arrow"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "l",
+                        "modifiers": {
+                            "mandatory": [
+                                "option"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_arrow"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "wasd to arrows (↑←↓→)",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "a"
+                    },
+                    "to": [
+                        {
+                            "key_code": "left_arrow"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "s"
+                    },
+                    "to": [
+                        {
+                            "key_code": "down_arrow"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "w"
+                    },
+                    "to": [
+                        {
+                            "key_code": "up_arrow"
+                        }
+                    ],
+                    "type": "basic"
+                },
+                {
+                    "from": {
+                        "key_code": "d"
+                    },
+                    "to": [
+                        {
+                            "key_code": "right_arrow"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        }
+    ]
+}
