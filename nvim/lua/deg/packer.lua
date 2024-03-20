@@ -51,63 +51,7 @@ return require('packer').startup(function(use)
 
     use('github/copilot.vim')
     use('ThePrimeagen/vim-be-good')
-
-    use({
-        "jackMort/ChatGPT.nvim",
-        config = function()
-            require("chatgpt").setup({
-                api_key_cmd = "op read op://Private/55bi7szbphqgjobr7lfh2yni6a/credential --no-newline",
-            })
-        end,
-        requires = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim"
-        }
-    })
-
     use('Bekaboo/deadcolumn.nvim')
-
-    use({
-        "epwalsh/obsidian.nvim",
-        config = function()
-            require("obsidian").setup({
-                dir = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal",
-                daily_notes = {
-                    folder = "dailies",
-                },
-                completion = {
-                    nvim_cmp = true,
-                },
-                --note_id_func = function(title)
-                --    local sane_name = ""
-                --    if title ~= nil then
-                --        -- If title is given, transform it into valid file name.
-                --        sane_name = title:gsub(" ", "_"):gsub("[^A-Za-z0-9-]", ""):lower()
-                --    else
-                --        -- If title is nil, just add 4 random uppercase letters to the suffix.
-                --        for _ in 1, 4 do
-                --            sane_name = sane_name .. string.char(math.random(65, 90))
-                --        end
-                --    end
-                --    return sane_name
-                --end,
-            })
-        end,
-    })
-
-    use {
-        "someone-stole-my-name/yaml-companion.nvim",
-        requires = {
-            { "neovim/nvim-lspconfig" },
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope.nvim" },
-        },
-        config = function()
-            require("telescope").load_extension("yaml_schema")
-        end,
-    }
-
     use 'mfussenegger/nvim-dap'
     use 'windwp/nvim-projectconfig'
 end)
