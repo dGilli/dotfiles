@@ -11,6 +11,7 @@ alias aws='docker run --rm -it -v ~/.aws:/root/.aws amazon/aws-cli '
 alias ffmpeg='docker run --rm -it -v "$PWD":/app -w /app jrottenberg/ffmpeg '
 alias yo='docker run --rm -it -v "$PWD":/app nystudio107/node-yeoman:16-alpine '
 alias tree='f(){ docker run --rm -it -v "$PWD":/app johnfmorton/tree-cli tree "$@";  unset -f f; }; f'
+alias dk='docker'
 alias dc='docker-compose'
 
 # Watson aliases
@@ -30,3 +31,15 @@ alias watsonfzf="watson frames | tac | fzf --height 40% --prompt \"Select a Wats
 
 # Jumpstart work mode
 alias start='apps=("Microsoft Teams" "Microsoft Outlook" "Kitty" "Firefox Developer Edition" "Obsidian"); for app in "${apps[@]}"; do open -a $app; done'
+
+# Homebrew force update everything
+alias brewupdate='brew upgrade --greedy && brew upgrade --casks --greedy'
+
+# Git init and create a repo (--private or --public flag required)
+alias gitinitdir='git init \
+          && git commit -m "batman" --allow-empty \
+          && gh repo create ${PWD##*/} --push -s . '
+
+# Go init project with current dir name
+alias goinitdir='go mod init "github.com/dGilli/${PWD##*/}"'
+
