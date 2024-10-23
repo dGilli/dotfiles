@@ -1,12 +1,35 @@
+# Updates Homebrew formulae and casks, and writes the versions to a lockfile.
+brew_update() {
+    LOCKFILE="$HOME/.config/brew.lock"
+
+    echo "Updating homebrew formulae\n"
+    brew upgrade --greedy
+
+    echo "Updating homebrew casks\n"
+    brew upgrade --casks --greedy
+
+    echo "Writing to $LOCKFILE\n"
+    brew list --versions > "$LOCKFILE"
+}
+
+symdotfiles() {
+    DOTFILES_DIR_PATH=$(dirname "$(pwd)")
+    echo "Symlinking dotfiles from $DOTFILES_DIR_PATH\n"
+
+    ln -s $DOTFILES_DIR_PATH/docker/config.json ~/.docker/config.json
+    ln -s $DOTFILES_DIR_PATH/docker/daemon.json ~/.docker/daemon.json
+    ln -s $DOTFILES_DIR_PATH/hammerspoon ~/.hammerspoon
+}
+
 # ------------------------------------------
 # Function: list_commits
 # Description:
 #     List all commits made in the last X days in all Git repositories found
 #     within the current directory and its subdirectories.
 #
-# Usage: 
+# Usage:
 #     list_commits <DAYS>
-# 
+#
 # Arguments:
 #     DAYS: The number of days to look back for commits.
 # ------------------------------------------
