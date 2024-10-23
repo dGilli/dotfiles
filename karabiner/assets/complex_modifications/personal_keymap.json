@@ -4,88 +4,96 @@
             "description": "Home row mod keys (asdf to ⌘⌥⇧⌃)",
             "manipulators": [
                 {
+                    "type": "basic",
                     "from": {
                         "key_code": "f",
                         "modifiers": {
-                            "optional": [
-                                "any"
-                            ]
+                            "optional": ["any"]
                         }
                     },
                     "to_if_alone": [
-                        {
-                            "key_code": "f"
-                        }
+                        { "key_code": "f" }
                     ],
                     "to_if_held_down": [
-                        {
-                            "key_code": "left_control"
-                        }
+                        { "key_code": "left_control" }
                     ],
-                    "type": "basic"
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "^com\\.nvidia\\.gfnpc\\.mall$"
+                            ]
+                        }
+                    ]
                 },
                 {
+                    "type": "basic",
                     "from": {
                         "key_code": "d",
                         "modifiers": {
-                            "optional": [
-                                "any"
-                            ]
+                            "optional": ["any"]
                         }
                     },
                     "to_if_alone": [
-                        {
-                            "key_code": "d"
-                        }
+                        { "key_code": "d" }
                     ],
                     "to_if_held_down": [
-                        {
-                            "key_code": "left_shift"
-                        }
+                        { "key_code": "left_shift" }
                     ],
-                    "type": "basic"
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "^com\\.nvidia\\.gfnpc\\.mall$"
+                            ]
+                        }
+                    ]
                 },
                 {
+                    "type": "basic",
                     "from": {
                         "key_code": "s",
                         "modifiers": {
-                            "optional": [
-                                "any"
-                            ]
+                            "optional": ["any"]
                         }
                     },
                     "to_if_alone": [
-                        {
-                            "key_code": "s"
-                        }
+                        { "key_code": "s" }
                     ],
                     "to_if_held_down": [
-                        {
-                            "key_code": "left_alt"
-                        }
+                        { "key_code": "left_alt" }
                     ],
-                    "type": "basic"
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "^com\\.nvidia\\.gfnpc\\.mall$"
+                            ]
+                        }
+                    ]
                 },
                 {
+                    "type": "basic",
                     "from": {
                         "key_code": "a",
                         "modifiers": {
-                            "optional": [
-                                "any"
-                            ]
+                            "optional": ["any"]
                         }
                     },
                     "to_if_alone": [
-                        {
-                            "key_code": "a"
-                        }
+                        { "key_code": "a" }
                     ],
                     "to_if_held_down": [
-                        {
-                            "key_code": "left_command"
-                        }
+                        { "key_code": "left_command" }
                     ],
-                    "type": "basic"
+                    "conditions": [
+                        {
+                            "type": "frontmost_application_unless",
+                            "bundle_identifiers": [
+                                "^com\\.nvidia\\.gfnpc\\.mall$"
+                            ]
+                        }
+                    ]
                 }
             ]
         },
