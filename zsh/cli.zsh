@@ -4,9 +4,9 @@
 #     List all commits made in the last X days in all Git repositories found
 #     within the current directory and its subdirectories.
 #
-# Usage: 
+# Usage:
 #     list_commits <DAYS>
-# 
+#
 # Arguments:
 #     DAYS: The number of days to look back for commits.
 # ------------------------------------------
