@@ -1,3 +1,11 @@
+# Install Homebrew formulae and casks through fzf
+brew_install() {
+    selected=$(brew search "$1" | grep -v "^$" | fzf --multi --preview "brew info {}")
+    if [ -n "$selected" ]; then
+        echo "$selected" | xargs brew install
+    fi
+}
+
 # Updates Homebrew formulae and casks, and writes the versions to a lockfile.
 brew_update() {
     LOCKFILE="$HOME/.config/brew.lock"
