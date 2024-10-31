@@ -1,3 +1,17 @@
+# Updates Homebrew formulae and casks, and writes the versions to a lockfile.
+brew_update() {
+    LOCKFILE="$HOME/.config/brew.lock"
+
+    echo "Updating homebrew formulae\n"
+    brew upgrade --greedy
+
+    echo "Updating homebrew casks\n"
+    brew upgrade --casks --greedy
+
+    echo "Writing to $LOCKFILE\n"
+    brew list --versions > "$LOCKFILE"
+}
+
 # ------------------------------------------
 # Function: list_commits
 # Description:
