@@ -1,2 +1,1 @@
-require("deg")
-print('hello')
+require("dgilli")

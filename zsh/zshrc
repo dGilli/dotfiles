@@ -89,16 +89,21 @@ else
 fi
 
 # Compilation flags
-export ARCHFLAGS="-arch x86_64"
+#export ARCHFLAGS="-arch x86_64"
 
 # Homebrew & Python paths for Apple Silicon
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
-
 export PATH="/Users/dennisgilli/go/bin:$PATH"
-
-# Personal scripts path
 export PATH="/Users/dennisgilli/.local/bin:$PATH"
 
 # Set personal aliases
 for config (~/.config/zsh/*.zsh) source $config
+
+# Fzf shell integration
+source <(fzf --zsh)
+
+# Link flyctl command-line utility
+export FLYCTL_INSTALL="/Users/dennisgilli/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
