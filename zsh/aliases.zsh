@@ -13,6 +13,7 @@ alias yo='docker run --rm -it -v "$PWD":/app nystudio107/node-yeoman:16-alpine '
 alias tree='f(){ docker run --rm -it -v "$PWD":/app johnfmorton/tree-cli tree "$@";  unset -f f; }; f'
 alias dk='docker'
 alias dc='docker-compose'
+alias dkill='docker stop $(docker ps -q)'
 
 # Watson aliases
 alias wt='watson'
