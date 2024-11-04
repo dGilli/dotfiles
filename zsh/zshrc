@@ -97,8 +97,10 @@ export PATH="/opt/homebrew/opt/python/libexec/bin:$PATH"
 export PATH="/Users/dennisgilli/go/bin:$PATH"
 export PATH="/Users/dennisgilli/.local/bin:$PATH"
 
-# Set personal aliases
-for config (~/.config/zsh/*.zsh) source $config
+# Set personal aliases and cli
+for config in $(find ~/.config/zsh -type f -name "*.zsh"); do
+    source $config
+done
 
 # Fzf shell integration
 source <(fzf --zsh)

@@ -43,3 +43,5 @@ alias gitinitdir='git init \
 # Go init project with current dir name
 alias goinitdir='go mod init "github.com/dGilli/${PWD##*/}"'
 
+# Create a new dir in ~/Projects
+alias mkpjt='mkdir $HOME/Projects/$@'
