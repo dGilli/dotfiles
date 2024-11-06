@@ -1,6 +1,22 @@
 {
     "rules": [
         {
+            "description": "Caps lock to escape",
+            "manipulators": [
+                {
+                    "from": {
+                        "key_code": "caps_lock"
+                    },
+                    "to": [
+                        {
+                            "key_code": "escape"
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
             "description": "Home row mod keys (asdf to ⌘⌥⇧⌃)",
             "manipulators": [
                 {
