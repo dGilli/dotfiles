@@ -48,6 +48,10 @@ sketchybar --add item clock right \
            --subscribe volume volume_change \
            --add item battery right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
+           --subscribe battery system_woke power_source_change \
+           --add item timew_state right \
+           --add event timew_state_change \
+           --set timew_state script="$PLUGIN_DIR/timew_state.sh" \
+           --subscribe timew_state timew_state_change
 
 sketchybar --update

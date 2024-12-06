@@ -16,11 +16,9 @@ alias dc='docker-compose'
 alias dkill='docker stop $(docker ps -q)'
 alias dlast='docker exec -it $(docker ps -l -q)'
 
-# Watson aliases
-alias wt='watson'
-alias wtd='watsond'
-alias wtagt='watsonagt'
-alias wtfzf='watsonfzf'
+# Timewarrior aliases
+alias timew='$HOME/.config/timewarrior/timew_hooks_proxy.sh /opt/homebrew/bin/timew'
+alias tw='timew'
 
 # Watson command to dynamically use current directory as project
 alias watsond='f() { watson "$1" --confirm-new-project "$(basename $(pwd))" "${@:2}"; unset -f f; }; f'
