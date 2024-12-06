@@ -14,6 +14,7 @@ alias tree='f(){ docker run --rm -it -v "$PWD":/app johnfmorton/tree-cli tree "$
 alias dk='docker'
 alias dc='docker-compose'
 alias dkill='docker stop $(docker ps -q)'
+alias dlast='docker exec -it $(docker ps -l -q)'
 
 # Watson aliases
 alias wt='watson'
