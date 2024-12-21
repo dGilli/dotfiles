@@ -49,6 +49,8 @@ sketchybar --add item clock right \
            --add item battery right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
            --subscribe battery system_woke power_source_change \
+           --add item memory right \
+           --set memory icon=󰍛 update_freq=5 script="$PLUGIN_DIR/ram.sh" \
            --add item timew_state right \
            --add event timew_state_change \
            --set timew_state script="$PLUGIN_DIR/timew_state.sh" \
