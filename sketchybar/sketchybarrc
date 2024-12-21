@@ -56,4 +56,9 @@ sketchybar --add item clock right \
            --set timew_state script="$PLUGIN_DIR/timew_state.sh" \
            --subscribe timew_state timew_state_change
 
+#--add item network.up right \
+#--set network.up update_freq=5 icon=⇡ script="$PLUGIN_DIR/network.sh" \
+#--add item network.down right \
+#--set network.down update_freq=5 icon=⇣ script="$PLUGIN_DIR/network.sh"
+
 sketchybar --update
