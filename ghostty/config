@@ -1,0 +1,13 @@
+theme              = dark:neobones_dark,light:catppuccin-latte
+
+font-family        = Hack Nerd Font Mono Regular
+font-size          = 16
+adjust-cell-height = 3
+font-thicken       = true
+font-feature       = -calt, -liga, and -dlig
+
+window-decoration  = false
+background         = #000000
+background-opacity = 0.8
+
+cursor-style       = block
