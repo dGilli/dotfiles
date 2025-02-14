@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Ensuring ZSH is our shell
+chsh -s /bin/zsh
+
+pushd "$DOTFILES" || exit
+for folder in ${STOW_FOLDERS//,/ }
+do
+  stow "$folder"
+done
+popd || exit
+
+git clone https://github.com/tmux-plugins/tpm "$TPM_INSTALL"
+
+git config --global user.name "${GIT_USERNAME}"
+git config --global user.email "${GIT_EMAIL}"
+git config --global init.defaultBranch "${GIT_DEFAULT_BRANCH}"
+gh auth login -wp https
+

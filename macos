@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ -z $STOW_FOLDERS ]]; then
+    STOW_FOLDERS="bin,karabiner,ghostty,nvim,personal,sketchybar,skhd,tmux,macintos,yabai,zsh"
+fi
+
+if [[ -z $DOTFILES ]]; then
+    DOTFILES=$HOME/.dotfiles
+fi
+
+env STOW_FOLDERS="$STOW_FOLDERS" DOTFILES="$DOTFILES" "$DOTFILES/install"
+

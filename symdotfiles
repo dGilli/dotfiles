@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-# Symlinking all the dooots for setup
-
-ln -s ~/.config/zsh/zshrc ~/.zshrc
-ln -s ~/.config/tmux/tmux.conf ~/.tmux.conf
