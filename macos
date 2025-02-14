@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [[ -z $STOW_FOLDERS ]]; then
+    STOW_FOLDERS="bin,karabiner,ghostty,nvim,personal,sketchybar,skhd,tmux,macintos,yabai,zsh"
+fi
+
+if [[ -z $DOTFILES ]]; then
+    DOTFILES=$HOME/.dotfiles
+fi
+
+if [[ -z $BREWFILE ]]; then
+    BREWFILE=$DOTFILES/personal/Brewfile
+fi
+
+if test ! "$(which brew)"; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+brewBundle "$BREWFILE"
+
+env STOW_FOLDERS="$STOW_FOLDERS" DOTFILES="$DOTFILES" "$DOTFILES/install"
+
+# shellcheck source=/dev/null
+source "$XDG_CONFIG_HOME/defaults"
+
+yabai --start-service
+skhd --start-service
+

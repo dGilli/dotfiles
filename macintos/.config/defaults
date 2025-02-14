@@ -1,0 +1,181 @@
+#!/usr/bin/env bash
+
+# Disabling autocorrect
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled 0
+
+# todo: NSQuitAlwaysKeepsWindows no longer exist, is there an equivalent?
+# Disabling system-wide resume
+# defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+
+# Disabling automatic termination of inactive apps
+defaults write NSGlobalDomain NSDisableAutomaticTermination --int 1
+
+# Allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection --int 1
+
+# todo: Double check if this is necessary
+# Disabling OS X Gate Keeper # Warning: you will be able to install any app you want from here on, not just Mac App Store apps
+# sudo spctl --master-disable
+# sudo defaults write /var/db/SystemPolicy-prefs.plist enabled -string no
+# defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Expanding the save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+
+# Saving to disk (not to iCloud) by default
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
+
+# Check for software updates daily, not just once per week
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# Disable smart quotes and smart dashes as they are annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Enabling full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+
+# Disabling press-and-hold for keys in favor of a key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write -g InitialKeyRepeat -int 10
+defaults write -g KeyRepeat -int 1
+
+# Setting trackpad & mouse speed to a reasonable number
+defaults write -g com.apple.trackpad.scaling 2
+defaults write -g com.apple.mouse.scaling 3
+
+# Enabling subpixel font rendering on non-Apple LCDs
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
+
+# Showing icons for hard drives, servers, and removable media on the desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+
+# Showing all filename extensions in Finder by default
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Disabling the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Use column view in all Finder windows by default
+defaults write com.apple.finder FXPreferredViewStyle Clmv
+
+# Avoiding the creation of .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Setting the icon size of Dock items to 36 pixels for optimal size/screen-realestate
+defaults write com.apple.dock tilesize -int 36
+
+# Speeding up Mission Control animations and grouping windows by application
+defaults write com.apple.dock expose-animation-duration -float 0.1
+defaults write com.apple.dock "expose-group-by-app" -bool true
+
+# Setting Dock to auto-hide and removing the auto-hiding delay
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Enabling UTF-8 ONLY in Terminal.app and setting the Pro theme by default
+defaults write com.apple.terminal StringEncodings -array 4
+defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
+defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
+
+# Preventing Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Speeding up wake from sleep to 24 hours from an hour # http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
+sudo pmset -a standbydelay 86400
+
+# Disable annoying backswipe in Chrome
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+
+# Setting screenshots location to ~/Desktop
+defaults write com.apple.screencapture location -string "$HOME/Desktop"
+
+# todo: Why do we do this? Screenshots do not have transparent bits...
+# Setting screenshot format to PNG
+defaults write com.apple.screencapture type -string "png"
+
+# Hiding Safari's bookmarks bar by default
+defaults write com.apple.Safari ShowFavoritesBar -bool false
+
+# Disabling Safari's thumbnail cache for History and Top Sites
+defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
+
+# Enabling Safari's debug menu
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+
+# Making Safari's search banners default to Contains instead of Starts With
+defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
+
+# Removing useless icons from Safari's bookmarks bar
+defaults write com.apple.Safari ProxiesInBookmarksBar "()"
+
+# Allow hitting the Backspace key to go to the previous page in history
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
+
+# Enabling the Develop menu and the Web Inspector in Safari
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+
+# Adding a context menu item for showing the Web Inspector in web views
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Use "~/Downloads/Incomplete" to store incomplete downloads
+defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
+defaults write org.m0k.transmission IncompleteDownloadFolder -string "$HOME/Downloads/Incomplete"
+
+# Don't prompt for confirmation before downloading
+defaults write org.m0k.transmission DownloadAsk -bool false
+
+# Trash original torrent files
+defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
+
+# Hide transmission donate message
+defaults write org.m0k.transmission WarningDonate -bool false
+
+# Hide transmission legal disclaimer
+defaults write org.m0k.transmission WarningLegal -bool false
+
+# Do not automatically rearrange Spaces based on most recent use
+defaults write com.apple.dock mru-spaces -bool false
+
+# todo: Find a better way to set these settings then manually
+echo "Please manually add keyboard shortcuts for switching between desktops (Ctrl + 1-9)."
+open "$SYSTEM_PREFERENCES_URL.keyboard"; read -rp "Press [Enter] to continue..."
+echo "Please manually enable auto-hiding for the menu bar."
+open "$SYSTEM_PREFERENCES_URL"; read -rp "Press [Enter] to continue..."
+
+# todo: Add separate setup for plist´s
+# Enabling snap-to-grid for icons on the desktop and in other icon views
+/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+/usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
+
+# Returns the plist entry for a Dock item, given the app path
+dock_item() {
+    printf '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>%s</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>', "$1"
+}
+
+# Customize applications shown in dock
+defaults delete com.apple.dock persistent-apps persistent-others recent-apps
+defaults write com.apple.dock persistent-apps -array \
+    "$(dock_item /Applications/kitty.app)" \
+    "$(dock_item /Applications/Safari.app)" \
+    "$(dock_item /Applications/Microsoft\ Teams.app)" \
+    "$(dock_item /Applications/Microsoft\ Outlook.app)" \
+    "$(dock_item /System/Applications/Utilities/Screenshot.app)"
+
+# Turn on "Displays have separate Spaces" so SketchyBar will only work properly
+defaults write com.apple.spaces spans-displays -bool false
+
+# Speeding up wake from sleep to 24 hours from an hour
+# http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
+sudo pmset -a standbydelay 86400
+
+killall Finder Dock SystemUIServer 2>/dev/null

@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+# Stale Projects Cleaner
+#
+# This script finds stale directories in the project folder that have not been
+# modified in a given number of days.
+#
+# Usage:
+#   ./script.sh [DAYS] [--dry-run|--debug]
+#
+# @author    Dennis Gilli <me@dennisgilli.com>
+# @copyright Copyright (c) 2024 Dennis Gilli
+# @link      https://dennisgilli.com/
+# @license   MIT
+
+RED="\033[1;31m"
+RESET="\033[0m"
+
+days_since_modified=""
+dry_run=false
+
+# Parse arguments, allowing either order for the days and --dry-run/--debug flag
+for arg in "$@"; do
+    if [[ "$arg" == "--dry-run" || "$arg" == "--debug" ]]; then
+        dry_run=true
+    elif [[ "$arg" =~ ^[0-9]+$ ]]; then
+        days_since_modified="+$arg"
+    else
+        echo "Error: Invalid argument '$arg'"
+        exit 1
+    fi
+done
+
+find_output=$(find ~/Projects -maxdepth 1 -type d -mtime "$days_since_modified" 2>&1)
+find_status=$?
+
+if [[ $find_status -ne 0 ]]; then
+    echo "$find_output"
+    exit $find_status
+fi
+
+selected=$(echo "$find_output" | fzf --multi)
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+delete_dirs=()
+while IFS= read -r dir; do
+    if [[ -d "$dir/.git" ]]; then
+        # Check if the Git repo has uncommitted changes
+        if ! git -C "$dir" diff --quiet --ignore-submodules HEAD &>/dev/null; then
+            echo -e "$dir ${RED}[Dirty]${RESET}"
+            delete_dirs+=("$dir")
+        fi
+    else
+        echo -e "$dir ${RED}[Not a Git repository]${RESET}"
+        delete_dirs+=("$dir")
+    fi
+done <<< "$selected"
+
+if [[ ${#delete_dirs[@]} -gt 0 ]]; then
+    read -rp "Do you want to delete these directories? (yes/no): " confirm
+    if [[ "$confirm" == "yes" ]]; then
+        for dir in "${delete_dirs[@]}"; do
+            if [[ "$dry_run" == true ]]; then
+                echo "[DRY-RUN] Would delete: $dir"
+            else
+                rm -rf "$dir"
+                echo "Deleted $dir"
+            fi
+        done
+    else
+        echo "No directories were deleted."
+    fi
+fi
+

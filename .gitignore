@@ -1,4 +1,2 @@
-tmux/plugins
-thefuck/__pycache__
-karabiner/automatic_backups
-todo
+bin/.local/bin
+
