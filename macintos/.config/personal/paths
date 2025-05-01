@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+
+eval "$("$HOMEBREW_INSTALL"/bin/brew shellenv)"
+chmod -R go-w "$(brew --prefix)/share/zsh"
+
 addToPathFront "$DENO_INSTALL"
 addToPath /usr/local/go/bin
 addToPath "$GOPATH"/bin

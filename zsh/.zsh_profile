@@ -28,7 +28,3 @@ addToPathFront $HOME/go/bin
 addToPathFront $HOME/.deno/bin
 addToPathFront $HOME/.fly/bin
 
-# Homebrew & Python paths for Apple Silicon
-#eval "$(/opt/homebrew/bin/brew shellenv)"
-#addToPathFront /opt/homebrew/opt/python/libexec/bin
-
