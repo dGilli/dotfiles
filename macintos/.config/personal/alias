@@ -21,6 +21,7 @@ alias timew='$HOME/.local/scripts/timew_hooks_proxy.sh /opt/homebrew/bin/timew'
 alias tw='timew'
 alias brewupgrade='brew update && brew upgrade --greedy && brew upgrade --casks --greedy'
 alias pbc="pbcopy"
+alias opena="open -a"
 
 alias vi="$VIM"
 alias vim="$VIM"
