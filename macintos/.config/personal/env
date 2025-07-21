@@ -13,7 +13,7 @@ export GIT_EMAIL="me@dennisgilli.com"
 export GIT_DEFAULT_BRANCH="main"
 
 start() {
-  apps=("Microsoft Teams" "Microsoft Outlook" "Kitty" "Firefox Developer Edition" "Obsidian")
+  apps=("Microsoft Teams" "Microsoft Outlook" "Kitty" "librewolf" "Obsidian")
   for app in "${apps[@]}"; do
     open -a "$app"
   done
