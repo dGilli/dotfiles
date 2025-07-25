@@ -1,0 +1,15 @@
+#!/bin/bash
+
+tag="$1"
+packages=""
+
+while IFS= read -r line; do
+    # todo Allow for comments in definitions file
+    package=$(echo "$line" | grep -oP "[a-zA-Z0-9-_\.]+(?=\[(?:.+,)?$tag\]?|\s|$)")
+    packages+="$package "
+done
+
+packages=$(echo "$packages" | xargs)
+
+echo "$packages"
+exit 0

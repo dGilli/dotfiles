@@ -1,8 +1,10 @@
+config-file = ?config-override
+
 macos-icon              = custom-style
 macos-icon-screen-color = #2a2a2a,#7b7b7b
 macos-icon-ghost-color  = #ffffff
 
-theme                   = dark:neobones_dark,light:catppuccin-latte
+theme                   = neobones_dark
 
 font-family             = Hack Nerd Font Mono Regular
 font-size               = 16

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+if [[ -z $STOW_FOLDERS ]]; then
+    STOW_FOLDERS="bin,ghostty,nvim,personal,tmux,uwuntu,zsh,librewolf"
+fi
+
+if [[ -z $DOTFILES ]]; then
+    DOTFILES=$HOME/.dotfiles
+fi
+
+if [[ -z $PACKAGES ]]; then
+    PACKAGES="$(cat ./personal/.config/packages.txt | ./parse_packages_file ubuntu)"
+fi
+
+env STOW_FOLDERS="$STOW_FOLDERS" DOTFILES="$DOTFILES" OS="$PACKAGES" "$DOTFILES/install"
+
+echo "Packages: $PACKAGES"
+read -e -p "Do you want to install those packages? [y/N]> " choice
+if [[ "$choice" == [Yy]* ]]
+then
+    sudo mv /etc/yum.repos.d /etc/yum.repos.d.bak
+    sudo ln -s $HOME/.config/yum.repos.d /etc/yum.repos.d
+    sudo dnf install $PACKAGES --skip-unavailable
+fi
