@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [[ -z $STOW_FOLDERS ]]; then
+    STOW_FOLDERS="bin,ghostty,nvim,personal,tmux,uwuntu,zsh,librewolf"
+fi
+
+if [[ -z $DOTFILES ]]; then
+    DOTFILES=$HOME/.dotfiles
+fi
+
+if [[ -z $PACKAGES ]]; then
+    PACKAGES="$(cat ./personal/.config/packages.txt | ./parse_packages_file ubuntu)"
+fi
+
+read -e -p "Do you want to create a new SSH key? [y/N]> " choice
+[[ "$choice" == [Yy]* ]] && ssh-keygen
+
+echo "Packages: $packages"
+read -e -p "Do you want to install those packages? [y/N]> " choice
+[[ "$choice" == [Yy]* ]] && sudo dnf install $packages --skip-unavailable
+
+env STOW_FOLDERS="$STOW_FOLDERS" DOTFILES="$DOTFILES" OS="$PACKAGES" "$DOTFILES/install"

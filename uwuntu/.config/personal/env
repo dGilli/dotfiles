@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# Fzf shell integration
+# shellcheck source=/dev/null
+source <(fzf --zsh)
+
+export STOW_FOLDERS="bin,karabiner,ghostty,nvim,personal,sketchybar,skhd,tmux,macintos,yabai,zsh"
+
+export SYSTEM_PREFERENCES_URL="x-apple.systempreferences:com.apple.preference"
+
+export GIT_USERNAME="dGilli"
+export GIT_EMAIL="me@dennisgilli.com"
+export GIT_DEFAULT_BRANCH="main"
+
+start() {
+  apps=("Microsoft Teams" "Microsoft Outlook" "Kitty" "librewolf" "Obsidian")
+  for app in "${apps[@]}"; do
+    open -a "$app"
+  done
+}
+
+my_ip() {
+  ip address | grep -o "inet 192.*/" | awk '{ print $2 }' | tr / ' ' | xargs
+}
+
+tree() {
+  docker run --rm -it -v "$PWD":/app johnfmorton/tree-cli tree "$@"
+}
+
+mkpjt() {
+  mkdir "$HOME/Projects/$*"
+}
+
+addToPath() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$PATH:$1
+    fi
+}
+
+addToPathFront() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
+commitDotFiles() {
+    pushd "$DOTFILES" || exit
+    pushd personal || exit
+    git add .
+    git commit -m "automagic messaging commiting dotfiles"
+    git push origin main
+    popd || exit
+    git add .
+    git commit -m "automagic messaging commiting dotfiles"
+    git push origin main
+    popd || exit
+}
+

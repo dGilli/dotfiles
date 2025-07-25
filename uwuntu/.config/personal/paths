@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+addToPathFront "$DENO_INSTALL"
+addToPath /usr/local/go/bin
+addToPath "$GOPATH"/bin
+addToPath "$HOME"/.cargo/bin
+addToPath "$HOME"/.rustup
+
