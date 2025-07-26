@@ -1,0 +1,11 @@
+[Keyboard]
+RepeatDelay=300
+
+[Libinput][1267][12821][ELAN0524:00 04F3:3215 Touchpad]
+ClickMethod=2
+NaturalScroll=true
+PointerAcceleration=0.400
+
+# todo Make config device agnostic
+[Touchpad]
+NaturalScroll=true

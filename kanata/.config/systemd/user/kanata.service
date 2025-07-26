@@ -1,0 +1,11 @@
+[Unit]
+Description=Kanata
+
+[Service]
+Type=simple
+ExecStartPre=/sbin/modprobe uinput
+ExecStart=/usr/bin/kanata --cfg /home/dgilli/.config/kanata/kanata.kbd
+Restart=no
+
+[Install]
+WantedBy=default.target
