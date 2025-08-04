@@ -40,3 +40,11 @@
   fn
 )
 
+(defoverrides
+  (lalt h) (left)
+  (lalt j) (down)
+  (lalt k) (up)
+  (lalt l) (right)
+  (lsft bspc) (del)
+)
+
