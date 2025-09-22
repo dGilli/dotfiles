@@ -16,4 +16,6 @@ audio_volume=$(amixer -M get Master |\
 
 net_info=$(nmcli | awk 'NR==1')
 
-echo $net_info $audio_volume $battery_info $date_formatted
+temperature=$(cat /sys/class/thermal/thermal_zone*/temp | awk '{print $1/1000 "C"}' | sed -n '6p')
+
+echo $net_info $audio_volume $temperature $battery_info $date_formatted
