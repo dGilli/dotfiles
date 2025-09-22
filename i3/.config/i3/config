@@ -258,3 +258,4 @@ for_window {
 
 include /etc/sway/config.d/*
 exec $HOME/.config/i3/initapp.sh
+exec --no-startup-id i3-msg workspace 2
