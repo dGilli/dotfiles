@@ -35,7 +35,7 @@ yabai -m config window_gap                   0
 
 #yabai -m rule --add app='.*' space=^1
 yabai -m rule --add app='^(kitty|Ghostty|ghostty)$' space=2
-yabai -m rule --add app='^(Safari|Firefox Developer Edition|Brave Browser|qutebrowser)$' space=3
+yabai -m rule --add app='^(Safari|Firefox Developer Edition|Brave Browser|qutebrowser|LibreWolf)$' space=3
 yabai -m rule --add app='^(Microsoft Outlook|Microsoft Teams|Discord|Slack)$' space=4
 yabai -m rule --add app='^Obsidian$' space=5
 
