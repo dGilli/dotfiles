@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="bin,karabiner,ghostty,nvim,personal,sketchybar,skhd,tmux,macintos,yabai,zsh,librewolf"
+    STOW_FOLDERS="bin,ghostty,nvim,personal,tmux,zsh,librewolf,kanata,macintos,sketchybar,skhd,yabai"
 fi
 
 if [[ -z $DOTFILES ]]; then
