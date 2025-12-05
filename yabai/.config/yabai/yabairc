@@ -57,8 +57,7 @@ yabai -m rule --add app='^Docker Desktop$' manage=off
 
 #yabai -m rule --add app="GeForce" manage=on fullscreen=on
 
-# spacebar padding on top screen
-SPACEBAR_HEIGHT=$(spacebar -m config height)
-yabai -m config external_bar "all:$SPACEBAR_HEIGHT:0"
+SKETCHYBAR_HEIGHT=$(sketchybar --query bar | jq '.height')
+yabai -m config external_bar "all:$SKETCHYBAR_HEIGHT:0"
 
 echo "yabai configuration loaded.."
